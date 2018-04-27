@@ -42,20 +42,9 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String notTieAndUnderFour() {
-        String score = "";
-        int tempScore = 0;
-        tempScore = m_score1;
-        score = getScoreAlias(score, tempScore);
-        score+="-";
-        tempScore = m_score2;
-        score = getScoreAlias(score, tempScore);
-
-        return score;
+        return  aliasOfScores.get(m_score1)+"-"+aliasOfScores.get(m_score2);
     }
 
-    private String getScoreAlias(String score, int tempScore) {
-        return score += aliasOfScores.get(tempScore);
-    }
 
     private String overFourCases() {
         int minusResult = m_score1-m_score2;
