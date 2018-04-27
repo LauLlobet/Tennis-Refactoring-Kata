@@ -19,8 +19,6 @@ public class TennisGame1 implements TennisGame {
     }
 
     public String getScore() {
-        String score = "";
-        int tempScore=0;
         if (m_score1==m_score2)
         {
             return tieCases();
@@ -29,10 +27,11 @@ public class TennisGame1 implements TennisGame {
         {
             return overFourCases();
         }
-        return notTieAndUnderFour(score);
+        return notTieAndUnderFour();
     }
 
-    private String notTieAndUnderFour(String score) {
+    private String notTieAndUnderFour() {
+        String score = "";
         int tempScore;
         for (int i = 1; i<3; i++)
         {
