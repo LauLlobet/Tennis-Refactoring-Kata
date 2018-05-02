@@ -1,3 +1,5 @@
+package approach1;
+
 import java.util.Hashtable;
 
 public class NotTieAndParticularScoreFormatter implements ScoreFormatter{

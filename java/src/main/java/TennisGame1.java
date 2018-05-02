@@ -1,3 +1,7 @@
+import approach1.ScoreFormatter;
+import approach1.ScoreFormatterFactory;
+import approach1.TennisGame;
+
 public class TennisGame1 implements TennisGame {
     private int player1Score = 0;
     private int player2Score = 0;

@@ -1,3 +1,5 @@
+package approach1;
+
 public class AdvantageOrWinScoreFormatter implements ScoreFormatter {
 
     public static final String ADVANTAGE_TEXT = "Advantage ";
