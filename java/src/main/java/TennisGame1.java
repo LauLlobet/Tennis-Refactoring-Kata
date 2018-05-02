@@ -32,7 +32,7 @@ public class TennisGame1 implements TennisGame {
     public String getScore() {
         if (m_score1==m_score2)
         {
-            return tieCases();
+            return tieCases(m_score1);
         }
         if (m_score1>=4 || m_score2>=4)
         {
@@ -54,17 +54,10 @@ public class TennisGame1 implements TennisGame {
         return "Win for player2";
     }
 
-    private String tieCases() {
-        switch (m_score1)
-        {
-            case 0:
-                     return "Love-All";
-            case 1:
-                    return  "Fifteen-All";
-            case 2:
-                    return "Thirty-All";
-            default:
-                    return "Deuce";
+    private String tieCases(Integer bothPlayersScore) {
+        if(bothPlayersScore >= 3){
+            return "Deuce";
         }
-    }
+        return aliasOfScores.get(bothPlayersScore)+"-All";
+   }
 }
