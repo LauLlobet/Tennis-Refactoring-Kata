@@ -16,7 +16,7 @@ public class TieScoreFormatter implements ScoreFormatter {
     }
 
     public String format() {
-        if(tennisScore.isAPlayerScoreMoreThanThirty()) {
+        if(tennisScore.isAPlayerScoreEqualOrMoreThanForty()) {
             return DEUCE_TEXT;
         }
         return duceForPeculiarNaming(tennisScore.getPlayer1Score());

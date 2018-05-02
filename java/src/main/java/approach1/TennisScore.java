@@ -1,14 +1,16 @@
 package approach1;
 
 public class TennisScore {
-    int player1Score = 0;
-    int player2Score = 0;
+    private int player1Score = 0;
+    private int player2Score = 0;
 
-    public static final String PLAYER2_NAME = "player2";
-    public static final String PLAYER1_NAME = "player1";
-    static final int MAX_SCORE_WITHOUT_A_WIN_CHANCE = 3;
+    private static final String PLAYER2_NAME = "player2";
+    private static final String PLAYER1_NAME = "player1";
 
-    public TennisScore() {
+    private static final int THIRTY_SCORE = 2;
+    private static final int FORTY_SCORE = 3;
+
+    TennisScore() {
     }
 
     public void wonPoint(String playerName) {
@@ -19,18 +21,18 @@ public class TennisScore {
         player2Score = player2Score + 1;
     }
 
-    public boolean isAPlayerScoreMoreThanThirty() {
-        return player1Score >= MAX_SCORE_WITHOUT_A_WIN_CHANCE
-                || player2Score >= MAX_SCORE_WITHOUT_A_WIN_CHANCE;
+    public boolean isAPlayerScoreEqualOrMoreThanForty() {
+        return player1Score > THIRTY_SCORE
+                || player2Score > THIRTY_SCORE;
     }
 
     public boolean isAPlayerScoreMoreThanForty() {
-        return player1Score > MAX_SCORE_WITHOUT_A_WIN_CHANCE
-                || player2Score > MAX_SCORE_WITHOUT_A_WIN_CHANCE;
+        return player1Score > FORTY_SCORE
+                || player2Score > FORTY_SCORE;
     }
 
     public boolean isAWin() {
-        return isAPlayerScoreMoreThanForty() && Math.abs(player1Score - player2Score) == 1;
+        return isAPlayerScoreMoreThanForty() && Math.abs(player1Score - player2Score) > 1;
     }
 
     public String playerNameWithMorePoints() {
