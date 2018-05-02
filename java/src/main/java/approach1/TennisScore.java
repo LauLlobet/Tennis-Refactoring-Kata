@@ -19,6 +19,11 @@ public class TennisScore {
         player2Score = player2Score + 1;
     }
 
+    public boolean isAPlayerScoreMoreThanThirty() {
+        return player1Score >= MAX_SCORE_WITHOUT_A_WIN_CHANCE
+                || player2Score >= MAX_SCORE_WITHOUT_A_WIN_CHANCE;
+    }
+
     public boolean isAPlayerScoreMoreThanForty() {
         return player1Score > MAX_SCORE_WITHOUT_A_WIN_CHANCE
                 || player2Score > MAX_SCORE_WITHOUT_A_WIN_CHANCE;

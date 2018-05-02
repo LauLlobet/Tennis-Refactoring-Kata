@@ -8,7 +8,7 @@ public class ScoreFormatterFactory {
 
     public static ScoreFormatter makesScoreFormatter(TennisScore tennisScore) {
         if (tennisScore.isTie()) {
-            return new TieScoreFormatter(tennisScore.getPlayer1Score());
+            return new TieScoreFormatter(tennisScore);
         }
         if(tennisScore.isAPlayerScoreMoreThanForty()) {
             return new AdvantageOrGameScoreFormatter(tennisScore);

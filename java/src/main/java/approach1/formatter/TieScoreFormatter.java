@@ -1,33 +1,28 @@
 package approach1.formatter;
 
 import approach1.ScoreFormatter;
-
-import java.util.Hashtable;
+import approach1.TennisScore;
 
 public class TieScoreFormatter implements ScoreFormatter {
 
-    private static final int LIMIT_FOR_PECULIAR_NAMING_AND_STARTING_OF_DUCE_SCORE = 3;
     private static final String DEUCE_TEXT = "Deuce";
     private static final String ALL_DUCE_TEXT = "-All";
-    private final int bothPlayersScore;
+
+    private final TennisScore tennisScore;
     private ScoreToText scoreToText = new ScoreToText();
 
-    public TieScoreFormatter(int bothPlayerScore) {
-        this.bothPlayersScore = bothPlayerScore;
+    public TieScoreFormatter(TennisScore tennisScore) {
+        this.tennisScore = tennisScore;
     }
 
     public String format() {
-            if(isPeculiarNamingScore()){
-                return duceForPeculiarNaming(bothPlayersScore);
-            }
+        if(tennisScore.isAPlayerScoreMoreThanThirty()) {
             return DEUCE_TEXT;
-    }
-
-    private boolean isPeculiarNamingScore() {
-        return bothPlayersScore < LIMIT_FOR_PECULIAR_NAMING_AND_STARTING_OF_DUCE_SCORE;
+        }
+        return duceForPeculiarNaming(tennisScore.getPlayer1Score());
     }
 
     private String duceForPeculiarNaming(Integer bothPlayersScore) {
-        return  scoreToText.scoreToText(bothPlayersScore)+ ALL_DUCE_TEXT;
+        return scoreToText.scoreToText(bothPlayersScore) + ALL_DUCE_TEXT;
     }
 }
