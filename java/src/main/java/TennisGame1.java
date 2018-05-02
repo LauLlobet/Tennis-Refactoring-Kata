@@ -38,11 +38,11 @@ public class TennisGame1 implements TennisGame {
         {
             return overFourCases();
         }
-        return notTieAndUnderFour();
+        return notTieAndUnderFour(m_score1,m_score2);
     }
 
-    private String notTieAndUnderFour() {
-        return  aliasOfScores.get(m_score1)+"-"+aliasOfScores.get(m_score2);
+    private String notTieAndUnderFour(int firstPlayerScore,int secondPlayerScore) {
+        return  aliasOfScores.get( firstPlayerScore) + "-" + aliasOfScores.get(secondPlayerScore);
     }
 
 
