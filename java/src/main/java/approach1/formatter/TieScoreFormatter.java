@@ -10,13 +10,7 @@ public class TieScoreFormatter implements ScoreFormatter {
     private static final String DEUCE_TEXT = "Deuce";
     private static final String ALL_DUCE_TEXT = "-All";
     private final int bothPlayersScore;
-    private Hashtable<Integer, String> peculiarNamingForAScore = new Hashtable<Integer, String>(){{
-        put(0,"Love");
-        put(1,"Fifteen");
-        put(2, "Thirty");
-        put(3, "Forty");
-
-    }};
+    private ScoreToText scoreToText = new ScoreToText();
 
     public TieScoreFormatter(int bothPlayerScore) {
         this.bothPlayersScore = bothPlayerScore;
@@ -34,6 +28,6 @@ public class TieScoreFormatter implements ScoreFormatter {
     }
 
     private String duceForPeculiarNaming(Integer bothPlayersScore) {
-        return peculiarNamingForAScore.get(bothPlayersScore)+ "-All";
+        return  scoreToText.scoreToText(bothPlayersScore)+ ALL_DUCE_TEXT;
     }
 }
