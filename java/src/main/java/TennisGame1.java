@@ -2,7 +2,7 @@ public class TennisGame1 implements TennisGame {
     private int player1Score = 0;
     private int player2Score = 0;
     public static final String PLAYER1_NAME = "player1";
-    ScoreFormatter scoreFormatter = new ScoreFormatter();
+    ScoreFormatterLegacy scoreFormatter = new ScoreFormatterLegacy();
 
     public TennisGame1(String player1Name, String player2Name) {
     }
