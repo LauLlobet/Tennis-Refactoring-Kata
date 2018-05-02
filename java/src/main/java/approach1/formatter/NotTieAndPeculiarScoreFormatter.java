@@ -1,22 +1,20 @@
 package approach1.formatter;
 
 import approach1.ScoreFormatter;
+import approach1.TennisScore;
 
 public class NotTieAndPeculiarScoreFormatter implements ScoreFormatter {
 
     public static final String HYPHE_TEXT = "-";
-    private final int player1Score;
-    private final int player2Score;
     private final ScoreToText scoreToText = new ScoreToText();
+    private final TennisScore tennisScore;
 
-    public NotTieAndPeculiarScoreFormatter(int player1Score, int player2Score) {
-
-        this.player1Score = player1Score;
-        this.player2Score = player2Score;
+    public NotTieAndPeculiarScoreFormatter(TennisScore tennisScore) {
+        this.tennisScore = tennisScore;
     }
 
     public String format() {
-        return scoreToText.scoreToText(player1Score) +
-                HYPHE_TEXT + scoreToText.scoreToText(player2Score);
+        return scoreToText.scoreToText(tennisScore.getPlayer1Score()) +
+                HYPHE_TEXT + scoreToText.scoreToText(tennisScore.getPlayer2Score());
     }
 }
