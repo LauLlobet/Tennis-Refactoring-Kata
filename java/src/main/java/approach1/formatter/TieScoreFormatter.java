@@ -1,4 +1,6 @@
-package approach1;
+package approach1.formatter;
+
+import approach1.ScoreFormatter;
 
 import java.util.Hashtable;
 
@@ -16,7 +18,7 @@ public class TieScoreFormatter implements ScoreFormatter {
 
     }};
 
-    TieScoreFormatter(int bothPlayerScore) {
+    public TieScoreFormatter(int bothPlayerScore) {
         this.bothPlayersScore = bothPlayerScore;
     }
 
@@ -32,6 +34,6 @@ public class TieScoreFormatter implements ScoreFormatter {
     }
 
     private String duceForPeculiarNaming(Integer bothPlayersScore) {
-        return peculiarNamingForAScore.get(bothPlayersScore)+ ALL_DUCE_TEXT;
+        return peculiarNamingForAScore.get(bothPlayersScore)+ "-All";
     }
 }

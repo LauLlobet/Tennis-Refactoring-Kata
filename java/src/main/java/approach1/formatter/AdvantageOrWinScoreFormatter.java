@@ -1,4 +1,6 @@
-package approach1;
+package approach1.formatter;
+
+import approach1.ScoreFormatter;
 
 public class AdvantageOrWinScoreFormatter implements ScoreFormatter {
 
