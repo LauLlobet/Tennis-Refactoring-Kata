@@ -18,17 +18,6 @@ public class TennisGame2 implements approach2.TennisGame {
         String score = "";
 
 
-        if (player1Points > 0 && player2Points == 0 && PointCall.isPointCall(player1Points)) {
-            P1res = PointCall.fromPoints(player1Points).toString();
-            P2res = "Love";
-            score = P1res + "-" + P2res;
-        }
-        if (player2Points > 0 && player1Points == 0 && PointCall.isPointCall(player2Points)) {
-            P2res = PointCall.fromPoints(player2Points).toString();
-            P1res = "Love";
-            score = P1res + "-" + P2res;
-        }
-
         if (PointCall.isPointCall(player2Points) && PointCall.isPointCall(player1Points)) {
             score = PointCall.fromPoints(player1Points).toString() + "-" + PointCall.fromPoints(player2Points).toString();
         }
