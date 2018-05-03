@@ -66,9 +66,7 @@ public class TennisGame2 implements approach2.TennisGame {
             state = NO_TIE_CALLABLE;
         }
 
-        if(state != NO_TIE_CALLABLE && isTie() && !PointCall.canBeNamedDeuceOrAdvantage(player1Points)){
-            state = TIE_CALLABLE;
-        }else if(state != NO_TIE_CALLABLE && isTie() && PointCall.canBeNamedDeuceOrAdvantage(player1Points)){
+         if(state != NO_TIE_CALLABLE && isTie() && PointCall.canBeNamedDeuceOrAdvantage(player1Points)){
             state = DEUCE;
         }else if(state != NO_TIE_CALLABLE){
             state = NOT_INCLUDED;
