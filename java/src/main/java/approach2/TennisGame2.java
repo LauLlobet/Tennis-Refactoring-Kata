@@ -1,5 +1,6 @@
+package approach2;
 
-public class TennisGame2 implements TennisGame
+public class TennisGame2 implements approach2.TennisGame
 {
     public int P1point = 0;
     public int P2point = 0;

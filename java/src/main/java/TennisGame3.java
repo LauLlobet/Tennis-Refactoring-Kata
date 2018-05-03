@@ -1,3 +1,4 @@
+import approach2.TennisGame;
 
 public class TennisGame3 implements TennisGame {
     
