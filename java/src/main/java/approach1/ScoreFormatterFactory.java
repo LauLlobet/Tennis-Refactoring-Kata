@@ -15,9 +15,20 @@ public class ScoreFormatterFactory {
             return new GameScoreFormatter(tennisScore);
         }
         if(tennisScore.isAPlayerScoreMoreThanForty()) {
+            /*
+
+               TODO: this method explains implementation not domain
+
+             */
             return new AdvantageScoreFormatter(tennisScore);
         }
 
         return new NotTieAndPeculiarScoreFormatter(tennisScore);
     }
+
+    /*
+
+    TODO: try to implement it with state pattern ( transitions of a hierachy + to String)
+
+     */
 }

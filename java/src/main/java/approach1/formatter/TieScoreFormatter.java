@@ -24,5 +24,10 @@ public class TieScoreFormatter implements ScoreFormatter {
 
     private String duceForPeculiarNaming(Integer bothPlayersScore) {
         return scoreToText.scoreToText(bothPlayersScore) + ALL_DUCE_TEXT;
+        /*
+
+        TODO: non explicit of any implementation nor domain
+
+         */
     }
 }

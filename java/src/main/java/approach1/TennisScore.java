@@ -11,6 +11,11 @@ public class TennisScore {
     private static final int FORTY_SCORE = 3;
 
     TennisScore() {
+        /*
+
+        TODO: naming should be TennisGame/Set
+
+         */
     }
 
     public void wonPoint(String playerName) {
