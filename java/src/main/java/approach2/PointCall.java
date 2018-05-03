@@ -19,4 +19,8 @@ public enum PointCall {
     public String toString() {
         return call;
     }
+
+    public static boolean isPointCall(int points) {
+        return points < values().length;
+    }
 }
