@@ -58,7 +58,7 @@ public class TennisGame2 implements approach2.TennisGame {
         }
 
 
-        if(state == NO_TIE_CALLABLE && isNotCallable() || isTie()){
+        if(state == NO_TIE_CALLABLE && isTie()){
             if(!isMaximumPointsOfAnyPlayerAtLeast(4)) {
                 state = TIE_CALLABLE;
             }
