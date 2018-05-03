@@ -5,23 +5,13 @@ public class TennisGame2 implements approach2.TennisGame {
     public int player2Points = 0;
 
     public String score = "Love-All";
-
-    public String P1res = "";
-    public String P2res = "";
-    private String player1Name;
-    private String player2Name;
+    public String state = "pointCallWithNoTie";
 
     public TennisGame2(String player1Name, String player2Name) {
-        this.player1Name = player1Name;
-        this.player2Name = player2Name;
     }
 
     public String getScore() {
         return score;
-    }
-
-    private boolean isMinimumPointsOfAnyPlayerAtLeast(int points) {
-        return Math.min(player1Points,player2Points) >= points;
     }
 
     private boolean isMaximumPointsOfAnyPlayerAtLeast(int points) {
@@ -44,38 +34,76 @@ public class TennisGame2 implements approach2.TennisGame {
         return Math.abs(player1Points-player2Points) >= 2;
     }
 
-    public void wonPoint(String player) {
+    public void incrementPoint(String player){
         if (player == "player1") {
             player1Points++;
         }else {
             player2Points++;
         }
+    }
 
-        if (PointCall.isPointCall(player2Points) && PointCall.isPointCall(player1Points)) {
-            score = PointCall.fromPoints(player1Points).toString() + "-" + PointCall.fromPoints(player2Points).toString();
+    public void wonPoint(String player) {
+
+        incrementPoint(player);
+
+        if(state == "pointCallWithNoTie" && ( PointCall.canBeNamedDeuceOrAdvantage(player1Points-1) || PointCall.canBeNamedDeuceOrAdvantage(player2Points-1))){
+            state = "advantageOrWinOrTie";
+        }
+
+        if(state == "pointCallWithNoTie"){
+            pointCallWithNoTie();
         }
 
         if (isTie() && PointCall.isPointCall(player1Points)) {
-            score = PointCall.fromPoints(player1Points).toString();
-            score += "-All";
+            pointCallWithTie();
         }
 
-        if (isTie() && PointCall.canBeNamedDeuceOrAdvantage(player1Points))
-            score = "Deuce";
+        if (isTie() && PointCall.canBeNamedDeuceOrAdvantage(player1Points)) {
+            deuce();
+        }
 
         if (isPlayer1AheadOf2() && PointCall.canBeNamedDeuceOrAdvantage(player2Points)) {
-            score = "Advantage player1";
+            advantagePlayer1();
         }
 
         if (isPlayer2AheadOf1() && PointCall.canBeNamedDeuceOrAdvantage(player1Points)) {
-            score = "Advantage player2";
+            advantagePlayer2();
         }
 
         if (isMaximumPointsOfAnyPlayerAtLeast(4) && isPlayer1AheadOf2() && isTwoOrMoreDifferenceInPoints(player1Points, player2Points)) {
-            score = "Win for player1";
+            winPlayer1();
         }
         if (isMaximumPointsOfAnyPlayerAtLeast(4) && isPlayer2AheadOf1() && isTwoOrMoreDifferenceInPoints(player1Points, player2Points)) {
-            score = "Win for player2";
+            winPlayer2();
         }
+    }
+
+    private void winPlayer2() {
+        score = "Win for player2";
+    }
+
+    private void winPlayer1() {
+        score = "Win for player1";
+    }
+
+    private void advantagePlayer2() {
+        score = "Advantage player2";
+    }
+
+    private void advantagePlayer1() {
+        score = "Advantage player1";
+    }
+
+    private void deuce() {
+        score = "Deuce";
+    }
+
+    private void pointCallWithTie() {
+        score = PointCall.fromPoints(player1Points).toString();
+        score += "-All";
+    }
+
+    private void pointCallWithNoTie() {
+        score = PointCall.fromPoints(player1Points).toString() + "-" + PointCall.fromPoints(player2Points).toString();
     }
 }
