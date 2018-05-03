@@ -4,6 +4,7 @@ public class TennisGame2 implements approach2.TennisGame {
     public static final String CALLABLE = "TIE NO CALLABLE";
     public static final String NOT_INCLUDED = "NOT TESTED";
     private static final String TIE_CALLABLE = "tcc";
+    private static final String DEUCE = "deuce";
     public int player1Points = 0;
     public int player2Points = 0;
 
@@ -61,6 +62,8 @@ public class TennisGame2 implements approach2.TennisGame {
             state = CALLABLE;
         }else if(isTie() && !PointCall.canBeNamedDeuceOrAdvantage(player1Points)){
             state = TIE_CALLABLE;
+        }else if(isTie() && PointCall.canBeNamedDeuceOrAdvantage(player1Points)){
+            state = DEUCE;
         }else{
             state = NOT_INCLUDED;
         }
@@ -75,7 +78,7 @@ public class TennisGame2 implements approach2.TennisGame {
             return;
         }
 
-        if (isTie() && PointCall.canBeNamedDeuceOrAdvantage(player1Points)) {
+        if (state == DEUCE) {
             deuce();
             return;
         }
