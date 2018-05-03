@@ -21,20 +21,19 @@ public class TennisGame2 implements approach2.TennisGame {
             score = PointCall.fromPoints(player1Points).toString() + "-" + PointCall.fromPoints(player2Points).toString();
         }
 
-        if (isTie() && player1Points < 4) {
+        if (isTie() && PointCall.isPointCall(player1Points)) {
             score = PointCall.fromPoints(player1Points).toString();
             score += "-All";
         }
 
-
-        if (isTie() && isMinimumPointsOfAnyPlayerAtLeast(3))
+        if (isTie() && PointCall.canBeNamedDeuceOrAdvantage(player1Points))
             score = "Deuce";
 
-        if (isPlayer1AheadOf2() && isMinimumPointsOfAnyPlayerAtLeast(3)) {
+        if (isPlayer1AheadOf2() && PointCall.canBeNamedDeuceOrAdvantage(player2Points)) {
             score = "Advantage player1";
         }
 
-        if (isPlayer2AheadOf1() && isMinimumPointsOfAnyPlayerAtLeast(3)) {
+        if (isPlayer2AheadOf1() && PointCall.canBeNamedDeuceOrAdvantage(player1Points)) {
             score = "Advantage player2";
         }
 
