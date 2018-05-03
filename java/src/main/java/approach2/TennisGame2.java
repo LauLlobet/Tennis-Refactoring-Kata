@@ -49,12 +49,16 @@ public class TennisGame2 implements approach2.TennisGame {
         }
 
 
-        if(!isTie()){
+        if(!isCallable()){
             state = OTHER_STATE;
         }
 
         if(state == CALLABLE_TIE){
-            callableTie();
+            if (PointCall.isPointCall(player2Points) && PointCall.isPointCall(player1Points) && !isTie()) {
+                callableNoTieScore();
+            }else {
+                callableTie();
+            }
             return;
         }
 
@@ -114,5 +118,9 @@ public class TennisGame2 implements approach2.TennisGame {
 
     private void callableNoTieScore() {
         score = PointCall.fromPoints(player1Points).toString() + "-" + PointCall.fromPoints(player2Points).toString();
+    }
+
+    public boolean isCallable() {
+        return PointCall.isPointCall(player2Points) && PointCall.isPointCall(player1Points);
     }
 }
