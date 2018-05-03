@@ -51,13 +51,15 @@ public class TennisGame2 implements approach2.TennisGame {
             player2Points++;
         }
 
-        if (PointCall.isPointCall(player2Points) && PointCall.isPointCall(player1Points)) {
+        if (PointCall.isPointCall(player2Points) && PointCall.isPointCall(player1Points) && !isTie()) {
             score = PointCall.fromPoints(player1Points).toString() + "-" + PointCall.fromPoints(player2Points).toString();
+            return;
         }
 
-        if (isTie() && PointCall.isPointCall(player1Points)) {
+        if (isTie() && !PointCall.canBeNamedDeuceOrAdvantage(player1Points)) {
             score = PointCall.fromPoints(player1Points).toString();
             score += "-All";
+            return;
         }
 
         if (isTie() && PointCall.canBeNamedDeuceOrAdvantage(player1Points))
