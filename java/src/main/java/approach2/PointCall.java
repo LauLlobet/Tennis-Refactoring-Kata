@@ -1,7 +1,7 @@
 package approach2;
 
 public enum PointCall {
-    LOVE(0,"Love"), FIFTEEN(1,"Fifteen"), THIRTY(2,"Thirty"), FOURTY(3,"Fourty");
+    LOVE(0,"Love"), FIFTEEN(1,"Fifteen"), THIRTY(2,"Thirty"), FOURTY(3,"Forty");
 
     private final int points;
     private final String call;

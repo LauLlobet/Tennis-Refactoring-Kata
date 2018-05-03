@@ -1,8 +1,8 @@
 package approach2;
 
 public class TennisGame2 implements approach2.TennisGame {
-    public int P1point = 0;
-    public int P2point = 0;
+    public int player1Points = 0;
+    public int player2Points = 0;
 
     public String P1res = "";
     public String P2res = "";
@@ -16,59 +16,44 @@ public class TennisGame2 implements approach2.TennisGame {
 
     public String getScore() {
         String score = "";
-        if (P1point == P2point && P1point < 4) {
-            score = PointCall.fromPoints(P1point).toString();
-            score += "-All";
-        }
-        if (P1point == P2point && P1point >= 3)
-            score = "Deuce";
 
-        if (P1point > 0 && P2point == 0 && PointCall.isPointCall(P1point)) {
-            P1res = PointCall.fromPoints(P1point).toString();
+
+        if (player1Points > 0 && player2Points == 0 && PointCall.isPointCall(player1Points)) {
+            P1res = PointCall.fromPoints(player1Points).toString();
             P2res = "Love";
             score = P1res + "-" + P2res;
         }
-        if (P2point > 0 && P1point == 0 && PointCall.isPointCall(P2point)) {
-            P2res = PointCall.fromPoints(P2point).toString();
+        if (player2Points > 0 && player1Points == 0 && PointCall.isPointCall(player2Points)) {
+            P2res = PointCall.fromPoints(player2Points).toString();
             P1res = "Love";
             score = P1res + "-" + P2res;
         }
 
-        if (P1point > P2point && P1point < 4) {
-            if (P1point == 2)
-                P1res = "Thirty";
-            if (P1point == 3)
-                P1res = "Forty";
-            if (P2point == 1)
-                P2res = "Fifteen";
-            if (P2point == 2)
-                P2res = "Thirty";
-            score = P1res + "-" + P2res;
-        }
-        if (P2point > P1point && P2point < 4) {
-            if (P2point == 2)
-                P2res = "Thirty";
-            if (P2point == 3)
-                P2res = "Forty";
-            if (P1point == 1)
-                P1res = "Fifteen";
-            if (P1point == 2)
-                P1res = "Thirty";
-            score = P1res + "-" + P2res;
+        if (PointCall.isPointCall(player2Points) && PointCall.isPointCall(player1Points)) {
+            score = PointCall.fromPoints(player1Points).toString() + "-" + PointCall.fromPoints(player2Points).toString();
         }
 
-        if (P1point > P2point && P2point >= 3) {
+        if (player1Points == player2Points && player1Points < 4) {
+            score = PointCall.fromPoints(player1Points).toString();
+            score += "-All";
+        }
+
+
+        if (player1Points == player2Points && player1Points >= 3)
+            score = "Deuce";
+
+        if (player1Points > player2Points && player2Points >= 3) {
             score = "Advantage player1";
         }
 
-        if (P2point > P1point && P1point >= 3) {
+        if (player2Points > player1Points && player1Points >= 3) {
             score = "Advantage player2";
         }
 
-        if (P1point >= 4 && P2point >= 0 && (P1point - P2point) >= 2) {
+        if (player1Points >= 4 && player2Points >= 0 && (player1Points - player2Points) >= 2) {
             score = "Win for player1";
         }
-        if (P2point >= 4 && P1point >= 0 && (P2point - P1point) >= 2) {
+        if (player2Points >= 4 && player1Points >= 0 && (player2Points - player1Points) >= 2) {
             score = "Win for player2";
         }
         return score;
@@ -76,9 +61,9 @@ public class TennisGame2 implements approach2.TennisGame {
 
     public void wonPoint(String player) {
         if (player == "player1") {
-            P1point++;
+            player1Points++;
             return;
         }
-        P2point++;
+        player2Points++;
     }
 }
