@@ -29,13 +29,7 @@ public class TennisGame2 implements approach2.TennisGame {
             score = P1res + "-" + P2res;
         }
         if (P2point > 0 && P1point == 0) {
-            if (P2point == 1)
-                P2res = "Fifteen";
-            if (P2point == 2)
-                P2res = "Thirty";
-            if (P2point == 3)
-                P2res = "Forty";
-
+            P2res = PointCall.fromPoints(P2point).toString();
             P1res = "Love";
             score = P1res + "-" + P2res;
         }
