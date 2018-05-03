@@ -58,7 +58,7 @@ public class TennisGame2 implements approach2.TennisGame {
         }
 
 
-        if(state == NO_TIE_CALLABLE && !isMaximumPointsOfAnyPlayerAtLeast(4) && isTie()){
+        if(state == NO_TIE_CALLABLE && !PointCall.canBeNamedDeuceOrAdvantage(player1Points) && isTie()){
             state = TIE_CALLABLE;
         } else if(state == NO_TIE_CALLABLE && isMaximumPointsOfAnyPlayerAtLeast(4)){
             state = NOT_INCLUDED;
@@ -66,9 +66,7 @@ public class TennisGame2 implements approach2.TennisGame {
             state = NO_TIE_CALLABLE;
         }
 
-        if( isTie() && !PointCall.canBeNamedDeuceOrAdvantage(player1Points)){
-            state = TIE_CALLABLE;
-        }else if(state != NO_TIE_CALLABLE && isTie() && PointCall.canBeNamedDeuceOrAdvantage(player1Points)){
+        if(state != NO_TIE_CALLABLE && isTie() && PointCall.canBeNamedDeuceOrAdvantage(player1Points)){
             state = DEUCE;
         }else if(state != NO_TIE_CALLABLE ){
             state = NOT_INCLUDED;
