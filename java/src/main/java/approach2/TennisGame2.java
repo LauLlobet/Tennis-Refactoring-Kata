@@ -17,12 +17,7 @@ public class TennisGame2 implements approach2.TennisGame {
     public String getScore() {
         String score = "";
         if (P1point == P2point && P1point < 4) {
-            if (P1point == 0)
-                score = "Love";
-            if (P1point == 1)
-                score = "Fifteen";
-            if (P1point == 2)
-                score = "Thirty";
+            score = PointCall.fromPoints(P1point).toString();
             score += "-All";
         }
         if (P1point == P2point && P1point >= 3)
