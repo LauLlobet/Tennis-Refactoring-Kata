@@ -58,7 +58,7 @@ public class TennisGame2 implements approach2.TennisGame {
         }
 
 
-        if(state == NO_TIE_CALLABLE &&  !(PointCall.isPointCall(player2Points) && PointCall.isPointCall(player1Points) || isTie()) ){
+        if(state == NO_TIE_CALLABLE && isNotCallable() || isTie()){
             if(!isMaximumPointsOfAnyPlayerAtLeast(4)){
                 state = TIE_CALLABLE;
             }else {
@@ -141,5 +141,9 @@ public class TennisGame2 implements approach2.TennisGame {
 
     private void noTieCallable() {
         score = PointCall.fromPoints(player1Points).toString() + "-" + PointCall.fromPoints(player2Points).toString();
+    }
+
+    public boolean isNotCallable() {
+        return !(PointCall.isPointCall(player2Points) && PointCall.isPointCall(player1Points));
     }
 }
