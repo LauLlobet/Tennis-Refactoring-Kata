@@ -21,38 +21,42 @@ public class TennisGame2 implements approach2.TennisGame {
             score = PointCall.fromPoints(player1Points).toString() + "-" + PointCall.fromPoints(player2Points).toString();
         }
 
-        if (player1Points == player2Points && player1Points < 4) {
+        if (isTie() && player1Points < 4) {
             score = PointCall.fromPoints(player1Points).toString();
             score += "-All";
         }
 
 
-        if (player1Points == player2Points && player1Points >= 3)
+        if (isTie() && player1Points >= 3)
             score = "Deuce";
 
-        if (player1Points > player2Points && player2Points >= 3) {
+        if (isPlayer1AheadOf2() && player2Points >= 3) {
             score = "Advantage player1";
         }
 
-        if (player2Points > player1Points && player1Points >= 3) {
+        if (isPlayer2AheadOf1() && player1Points >= 3) {
             score = "Advantage player2";
         }
 
-        if (isPlayer1AheadOfCallsAndHisOponent() && isTwoOrMoreDifferenceInPoints(player1Points, player2Points)) {
+        if (player1Points >= 4 && isPlayer1AheadOf2() && isTwoOrMoreDifferenceInPoints(player1Points, player2Points)) {
             score = "Win for player1";
         }
-        if (isPlayer2AheadOfCallsAndOfHisOponent() && isTwoOrMoreDifferenceInPoints(player1Points, player2Points)) {
+        if (player2Points >= 4  && isPlayer2AheadOf1() && isTwoOrMoreDifferenceInPoints(player1Points, player2Points)) {
             score = "Win for player2";
         }
         return score;
     }
 
-    private boolean isPlayer1AheadOfCallsAndHisOponent() {
-        return player1Points >= 4 && player1Points > player2Points;
+    private boolean isTie() {
+        return player1Points == player2Points;
     }
 
-    private boolean isPlayer2AheadOfCallsAndOfHisOponent() {
-        return player2Points >= 4 && player1Points < player2Points;
+    private boolean isPlayer1AheadOf2() {
+        return player1Points > player2Points;
+    }
+
+    private boolean isPlayer2AheadOf1() {
+        return player1Points < player2Points;
     }
 
     private boolean isTwoOrMoreDifferenceInPoints(int player1Points, int player2Points) {
