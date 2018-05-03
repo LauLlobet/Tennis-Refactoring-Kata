@@ -27,14 +27,14 @@ public class TennisGame2 implements approach2.TennisGame {
         }
 
 
-        if (isTie() && player1Points >= 3)
+        if (isTie() && isMinimumPointsOfAnyPlayerAtLeast(3))
             score = "Deuce";
 
-        if (isPlayer1AheadOf2() && player2Points >= 3) {
+        if (isPlayer1AheadOf2() && isMinimumPointsOfAnyPlayerAtLeast(3)) {
             score = "Advantage player1";
         }
 
-        if (isPlayer2AheadOf1() && player1Points >= 3) {
+        if (isPlayer2AheadOf1() && isMinimumPointsOfAnyPlayerAtLeast(3)) {
             score = "Advantage player2";
         }
 
@@ -45,6 +45,10 @@ public class TennisGame2 implements approach2.TennisGame {
             score = "Win for player2";
         }
         return score;
+    }
+
+    private boolean isMinimumPointsOfAnyPlayerAtLeast(int points) {
+        return Math.min(player1Points,player2Points) >= points;
     }
 
     private boolean isMaximumPointsOfAnyPlayerAtLeast(int points) {
