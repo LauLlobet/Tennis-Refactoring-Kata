@@ -1,7 +1,8 @@
 package approach2;
 
 public class TennisGame2 implements approach2.TennisGame {
-    public static final String TIE_NO_CALLABLE = "TIE NO CALLABLE";
+    public static final String CALLABLE = "TIE NO CALLABLE";
+    public static final String NOT_INCLUDED = "NOT TESTED";
     public int player1Points = 0;
     public int player2Points = 0;
 
@@ -45,7 +46,7 @@ public class TennisGame2 implements approach2.TennisGame {
         return Math.abs(player1Points-player2Points) >= 2;
     }
 
-    String state = TIE_NO_CALLABLE;
+    String state = CALLABLE;
 
     public void wonPoint(String player) {
         if (player == "player1") {
@@ -55,7 +56,13 @@ public class TennisGame2 implements approach2.TennisGame {
         }
 
 
-        if (PointCall.isPointCall(player2Points) && PointCall.isPointCall(player1Points) && !isTie()) {
+        if(PointCall.isPointCall(player2Points) && PointCall.isPointCall(player1Points)){
+            state = CALLABLE;
+        }else{
+            state = NOT_INCLUDED;
+        }
+
+        if (!isTie() && state == CALLABLE) {
             noTieCallable();
             return;
         }
