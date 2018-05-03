@@ -2,6 +2,7 @@ package approach2;
 
 public class TennisGame2 implements approach2.TennisGame {
     public static final String CALLABLE_TIE = "CALLABLE_TIE";
+    public static final String OTHER_STATE = "otherState";
     public int player1Points = 0;
     public int player2Points = 0;
 
@@ -48,9 +49,13 @@ public class TennisGame2 implements approach2.TennisGame {
         }
 
 
-        if(state == CALLABLE_TIE){
-            //callableTie();
+        if(!isTie()){
+            state = OTHER_STATE;
+        }
 
+        if(state == CALLABLE_TIE){
+            callableTie();
+            return;
         }
 
 
