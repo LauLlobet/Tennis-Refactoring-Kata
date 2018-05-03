@@ -38,13 +38,17 @@ public class TennisGame2 implements approach2.TennisGame {
             score = "Advantage player2";
         }
 
-        if (player1Points >= 4 && isPlayer1AheadOf2() && isTwoOrMoreDifferenceInPoints(player1Points, player2Points)) {
+        if (isMaximumPointsOfAnyPlayerAtLeast(4) && isPlayer1AheadOf2() && isTwoOrMoreDifferenceInPoints(player1Points, player2Points)) {
             score = "Win for player1";
         }
-        if (player2Points >= 4  && isPlayer2AheadOf1() && isTwoOrMoreDifferenceInPoints(player1Points, player2Points)) {
+        if (isMaximumPointsOfAnyPlayerAtLeast(4) && isPlayer2AheadOf1() && isTwoOrMoreDifferenceInPoints(player1Points, player2Points)) {
             score = "Win for player2";
         }
         return score;
+    }
+
+    private boolean isMaximumPointsOfAnyPlayerAtLeast(int points) {
+        return Math.max(player2Points,player1Points) >= points;
     }
 
     private boolean isTie() {
