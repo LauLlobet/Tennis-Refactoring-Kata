@@ -3,6 +3,7 @@ package approach2;
 public class TennisGame2 implements approach2.TennisGame {
     public static final String CALLABLE = "TIE NO CALLABLE";
     public static final String NOT_INCLUDED = "NOT TESTED";
+    private static final String TIE_CALLABLE = "tcc";
     public int player1Points = 0;
     public int player2Points = 0;
 
@@ -56,18 +57,20 @@ public class TennisGame2 implements approach2.TennisGame {
         }
 
 
-        if(PointCall.isPointCall(player2Points) && PointCall.isPointCall(player1Points)){
+        if(PointCall.isPointCall(player2Points) && PointCall.isPointCall(player1Points) && !isTie()){
             state = CALLABLE;
+        }else if(isTie() && !PointCall.canBeNamedDeuceOrAdvantage(player1Points)){
+            state = TIE_CALLABLE;
         }else{
             state = NOT_INCLUDED;
         }
 
-        if (!isTie() && state == CALLABLE) {
+        if ( state == CALLABLE) {
             noTieCallable();
             return;
         }
 
-        if (isTie() && !PointCall.canBeNamedDeuceOrAdvantage(player1Points)) {
+        if ( state == TIE_CALLABLE) {
             tieCallable();
             return;
         }
