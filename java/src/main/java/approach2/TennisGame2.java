@@ -1,7 +1,7 @@
 package approach2;
 
 public class TennisGame2 implements approach2.TennisGame {
-    public static final String NO_TIE_CALLABLE = "TIE NO NO_TIE_CALLABLE";
+    public static final String NO_TIE_CALLABLE = "TIE NO CALLABLE";
     public static final String NOT_INCLUDED = "NOT TESTED";
     private static final String TIE_AND_CALLABLE = "tcc";
     private static final String DEUCE = "deuce";
@@ -58,8 +58,11 @@ public class TennisGame2 implements approach2.TennisGame {
         }
 
 
-        if(state == NO_TIE_CALLABLE && (!isMaximumPointsOfAnyPlayerAtLeast(4) || !PointCall.canBeNamedDeuceOrAdvantage(player1Points)) && isTie()){
+        if(state == NO_TIE_CALLABLE && (!isMaximumPointsOfAnyPlayerAtLeast(4) && !PointCall.canBeNamedDeuceOrAdvantage(player1Points) ) && isTie()){
             state = TIE_AND_CALLABLE;
+
+        } else if(false && state == "aaa" && !PointCall.canBeNamedDeuceOrAdvantage(player1Points)) {
+            //state = TIE_AND_CALLABLE;
 
         } else if(state == NO_TIE_CALLABLE && isMaximumPointsOfAnyPlayerAtLeast(4)){
             state = NOT_INCLUDED;
@@ -74,9 +77,8 @@ public class TennisGame2 implements approach2.TennisGame {
             state = DEUCE;
         }
 
-        if(state != NO_TIE_CALLABLE && isTie() && !PointCall.canBeNamedDeuceOrAdvantage(player1Points)){
-            state = TIE_AND_CALLABLE;
-        }else if(state != NO_TIE_CALLABLE && isTie() && PointCall.canBeNamedDeuceOrAdvantage(player1Points)){
+        if(isTie() && PointCall.canBeNamedDeuceOrAdvantage(player1Points)){
+            System.out.println("State to this "+ state );
             state = DEUCE;
         }
 
