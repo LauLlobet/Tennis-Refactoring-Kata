@@ -17,7 +17,6 @@ public class TennisGame2 implements approach2.TennisGame {
     public String getScore() {
         String score = "";
 
-
         if (PointCall.isPointCall(player2Points) && PointCall.isPointCall(player1Points)) {
             score = PointCall.fromPoints(player1Points).toString() + "-" + PointCall.fromPoints(player2Points).toString();
         }
@@ -39,13 +38,21 @@ public class TennisGame2 implements approach2.TennisGame {
             score = "Advantage player2";
         }
 
-        if (player1Points >= 4 && player1Points > player2Points && isTwoOrMoreDifferenceInPoints(player1Points, player2Points)) {
+        if (isPlayer1AheadOfCallsAndHisOponent() && isTwoOrMoreDifferenceInPoints(player1Points, player2Points)) {
             score = "Win for player1";
         }
-        if (player2Points >= 4  && player1Points < player2Points && isTwoOrMoreDifferenceInPoints(player1Points, player2Points)) {
+        if (isPlayer2AheadOfCallsAndOfHisOponent() && isTwoOrMoreDifferenceInPoints(player1Points, player2Points)) {
             score = "Win for player2";
         }
         return score;
+    }
+
+    private boolean isPlayer1AheadOfCallsAndHisOponent() {
+        return player1Points >= 4 && player1Points > player2Points;
+    }
+
+    private boolean isPlayer2AheadOfCallsAndOfHisOponent() {
+        return player2Points >= 4 && player1Points < player2Points;
     }
 
     private boolean isTwoOrMoreDifferenceInPoints(int player1Points, int player2Points) {
