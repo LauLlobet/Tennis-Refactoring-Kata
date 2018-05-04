@@ -61,7 +61,6 @@ public class TennisGame2 implements approach2.TennisGame {
             /*
             Transitions to CALLABLETIE state: callableNoTie
              */
-            //callableTieFormat();
             scoreStateObj = new CallableTieScoreState();
             score = scoreStateObj.toString(player1Points,player2Points);
             return;
@@ -72,7 +71,8 @@ public class TennisGame2 implements approach2.TennisGame {
             Transitions to NO_CALLABLE_TIE state: advantageP1Format
             Transitions to NO_CALLABLE_TIE state: callableNoTie
              */
-            noCallableTieFormat();
+            scoreStateObj = new NoCallableTieScoreState();
+            score = scoreStateObj.toString(player1Points,player2Points);
             return;
         }
 
@@ -81,7 +81,8 @@ public class TennisGame2 implements approach2.TennisGame {
             Transitions to WIN_P1 state: callableNoTie
             Transitions to WIN_P1 state: advantageP1Format
              */
-            winP1Format();
+            scoreStateObj = new WinScoreState();
+            score = scoreStateObj.toString(player1Points,player2Points);
             return;
         }
         if (isMaximumPointsOfAnyPlayerAtLeast(4) && isPlayer2AheadOf1() && isTwoOrMoreDifferenceInPoints(player1Points, player2Points)) {
@@ -129,13 +130,5 @@ public class TennisGame2 implements approach2.TennisGame {
 
     private void winP2Format() {
         score = "Win for player2";
-    }
-
-    private void winP1Format() {
-        score = "Win for player1";
-    }
-
-    private void noCallableTieFormat() {
-        score = "Deuce";
     }
 }
