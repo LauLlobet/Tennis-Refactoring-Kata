@@ -59,7 +59,6 @@ public class TennisGame2 implements approach2.TennisGame {
 
         if (isWinP1()) {
             /*
-            Transitions to WIN_P1 state: callableNoTie
             Transitions to WIN_P1 state: advantageP1Format
              */
             ScoreState nonTransitionedScoreStateObj;
