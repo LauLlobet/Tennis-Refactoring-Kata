@@ -45,10 +45,7 @@ public class TennisGame2 implements approach2.TennisGame {
             Transitions to CALLABLENOTIE state: callableTie
             Transitions to CALLABLENOTIE state: callableNoTie
             */
-
-            CallableNoTieScoreState nonTransitionedScoreStateObj;
-            nonTransitionedScoreStateObj = new CallableNoTieScoreState();
-            score = nonTransitionedScoreStateObj.toString(player1Points,player2Points);
+            score = scoreStateObj.toString(player1Points,player2Points);
             //callableNoTieFormat();
             return;
         }
