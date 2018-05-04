@@ -76,7 +76,7 @@ public class TennisGame2 implements approach2.TennisGame {
             return;
         }
 
-        if (isMaximumPointsOfAnyPlayerAtLeast(4) && isPlayer1AheadOf2() && isTwoOrMoreDifferenceInPoints(player1Points, player2Points)) {
+        if (isMaximumPointsOfAnyPlayerAtLeast(4) && isTwoOrMoreDifferenceInPoints(player1Points, player2Points)) {
             /*
             Transitions to WIN_P1 state: callableNoTie
             Transitions to WIN_P1 state: advantageP1Format
@@ -85,15 +85,6 @@ public class TennisGame2 implements approach2.TennisGame {
             score = scoreStateObj.toString(player1Points,player2Points);
             return;
         }
-        if (isMaximumPointsOfAnyPlayerAtLeast(4) && isPlayer2AheadOf1() && isTwoOrMoreDifferenceInPoints(player1Points, player2Points)) {
-            /*
-            Transitions to WIN_P2 state: callableNoTie
-            Transitions to WIN_P2 state: advantageP2
-             */
-            winP2Format();
-            return;
-        }
-
         if (isPlayer1AheadOf2() && PointCall.canBeNamedDeuceOrAdvantage(player2Points)) {
             /*
             Transitions to ADVANTAGE_P1 state: noCallableTie
