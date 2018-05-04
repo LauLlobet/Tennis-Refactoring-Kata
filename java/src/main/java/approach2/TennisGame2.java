@@ -50,7 +50,7 @@ public class TennisGame2 implements approach2.TennisGame {
             Transitions to WIN_P1 state: advantageP1Format
              */
             ScoreState nonTransitionedScoreStateObj;
-            nonTransitionedScoreStateObj = new WinScoreState();
+            nonTransitionedScoreStateObj = new WinP1ScoreState();
             score = nonTransitionedScoreStateObj.toString(player1Points,player2Points);
             scoreStateObj = new TESTHandledByIfListScoreState();
             return;
@@ -60,7 +60,7 @@ public class TennisGame2 implements approach2.TennisGame {
             Transitions to WIN_P1 state: advantageP1Format
              */
             ScoreState nonTransitionedScoreStateObj;
-            nonTransitionedScoreStateObj = new WinScoreState();
+            nonTransitionedScoreStateObj = new WinP2ScoreState();
             score = nonTransitionedScoreStateObj.toString(player1Points,player2Points);
             scoreStateObj = new TESTHandledByIfListScoreState();
             return;
