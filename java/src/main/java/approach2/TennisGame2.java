@@ -45,8 +45,17 @@ public class TennisGame2 implements approach2.TennisGame {
         scoreStateObj = scoreStateObj.nextState(player1Points,player2Points);
         score = scoreStateObj.toString(player1Points,player2Points);
 
-
         if (isWinP1()) {
+            /*
+            Transitions to WIN_P1 state: advantageP1Format
+             */
+            ScoreState nonTransitionedScoreStateObj;
+            nonTransitionedScoreStateObj = new WinScoreState();
+            score = nonTransitionedScoreStateObj.toString(player1Points,player2Points);
+            scoreStateObj = new TESTHandledByIfListScoreState();
+            return;
+        }
+        if (isWinP2()) {
             /*
             Transitions to WIN_P1 state: advantageP1Format
              */
@@ -89,7 +98,11 @@ public class TennisGame2 implements approach2.TennisGame {
     }
 
     private boolean isWinP1() {
-        return isMaximumPointsOfAnyPlayerAtLeast(4) && isTwoOrMoreDifferenceInPoints(player1Points, player2Points);
+        return isMaximumPointsOfAnyPlayerAtLeast(4) && isTwoOrMoreDifferenceInPoints(player1Points, player2Points) && isPlayer1AheadOf2();
+    }
+
+    private boolean isWinP2() {
+        return isMaximumPointsOfAnyPlayerAtLeast(4) && isTwoOrMoreDifferenceInPoints(player1Points, player2Points) && isPlayer2AheadOf1();
     }
 
     private boolean isNoCallableTie() {
