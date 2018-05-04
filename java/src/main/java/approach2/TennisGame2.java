@@ -1,13 +1,6 @@
 package approach2;
 
 public class TennisGame2 implements approach2.TennisGame {
-    private static final String CALLABLE_TIE = "callableTie";
-    private static final String CALLABLE_NO_TIE = "callableNoTie";
-    private static final String NO_CALLABLE_TIE = "noCallableTie";
-    private static final String WIN_P1 = "winP1Format";
-    private static final String WIN_P2 = "winP2Format";
-    private static final String ADVANTAGE_P1 = "advantageP1";
-    private static final String ADVANTAGE_P2 = "advantageP2";
     private int player1Points = 0;
     private int player2Points = 0;
 
@@ -89,7 +82,8 @@ public class TennisGame2 implements approach2.TennisGame {
             /*
             Transitions to ADVANTAGE_P1 state: noCallableTie
              */
-            advantageP1Format();
+            scoreStateObj = new AdvantageP1ScoreState();
+            score = scoreStateObj.toString(player1Points,player2Points);
             return;
         }
 
@@ -97,7 +91,8 @@ public class TennisGame2 implements approach2.TennisGame {
             /*
             Transitions to ADVANTAGE_P2 state: noCallableTie
              */
-            advantageP2Format();
+            scoreStateObj = new AdantageP2ScoreState();
+            score = scoreStateObj.toString(player1Points,player2Points);
         }
 
 
@@ -109,17 +104,5 @@ public class TennisGame2 implements approach2.TennisGame {
         } else {
             player2Points++;
         }
-    }
-
-    private void advantageP2Format() {
-        score = "Advantage player2";
-    }
-
-    private void advantageP1Format() {
-        score = "Advantage player1";
-    }
-
-    private void winP2Format() {
-        score = "Win for player2";
     }
 }
