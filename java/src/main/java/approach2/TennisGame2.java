@@ -45,17 +45,6 @@ public class TennisGame2 implements approach2.TennisGame {
         scoreStateObj = scoreStateObj.nextState(player1Points,player2Points);
         score = scoreStateObj.toString(player1Points,player2Points);
 
-        if (isNoCallableTie()) {
-            /*
-            Transitions to NO_CALLABLE_TIE state: advantageP1Format
-            Transitions to NO_CALLABLE_TIE state: callableNoTie
-             */
-            ScoreState nonTransitionedScoreStateObj;
-            nonTransitionedScoreStateObj = new NoCallableTieScoreState();
-            score = nonTransitionedScoreStateObj.toString(player1Points,player2Points);
-            scoreStateObj = new TESTHandledByIfListScoreState();
-            return;
-        }
 
         if (isWinP1()) {
             /*
@@ -74,7 +63,7 @@ public class TennisGame2 implements approach2.TennisGame {
             ScoreState nonTransitionedScoreStateObj;
             nonTransitionedScoreStateObj = new AdvantageP1ScoreState();
             score = nonTransitionedScoreStateObj.toString(player1Points,player2Points);
-            scoreStateObj = new TESTHandledByIfListScoreState();
+            scoreStateObj = nonTransitionedScoreStateObj;
             return;
         }
 
