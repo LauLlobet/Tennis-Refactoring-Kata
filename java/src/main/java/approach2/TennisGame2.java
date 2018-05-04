@@ -6,7 +6,7 @@ public class TennisGame2 implements approach2.TennisGame {
     public static final String NO_CALLABLE_TIE = "noCallableTie";
     public static final String WIN_P1 = "winP1Format";
     public static final String WIN_P2 = "winP2Format";
-    public static final String ADVANTAGE_P1 = "advantageP1Format";
+    public static final String ADVANTAGE_P1 = "advantageP1";
     public static final String ADVANTAGE_P2 = "advantageP2";
     public int player1Points = 0;
     public int player2Points = 0;
@@ -28,11 +28,11 @@ public class TennisGame2 implements approach2.TennisGame {
     }
 
     private boolean isMinimumPointsOfAnyPlayerAtLeast(int points) {
-        return Math.min(player1Points,player2Points) >= points;
+        return Math.min(player1Points, player2Points) >= points;
     }
 
     private boolean isMaximumPointsOfAnyPlayerAtLeast(int points) {
-        return Math.max(player2Points,player1Points) >= points;
+        return Math.max(player2Points, player1Points) >= points;
     }
 
     private boolean isTie() {
@@ -48,7 +48,7 @@ public class TennisGame2 implements approach2.TennisGame {
     }
 
     private boolean isTwoOrMoreDifferenceInPoints(int player1Points, int player2Points) {
-        return Math.abs(player1Points-player2Points) >= 2;
+        return Math.abs(player1Points - player2Points) >= 2;
     }
 
     public String state = CALLABLE_TIE;
@@ -67,40 +67,57 @@ public class TennisGame2 implements approach2.TennisGame {
         }
 
         if (isTie() && !PointCall.canBeNamedDeuceOrAdvantage(player1Points)) {
-            System.out.println("Transitions to CALLABLETIE state: "+ state);
             /*
             Transitions to CALLABLETIE state: callableNoTie
              */
-
             callableTieFormat();
             state = CALLABLE_TIE;
             return;
         }
 
         if (isTie() && PointCall.canBeNamedDeuceOrAdvantage(player1Points)) {
+            /*
+            Transitions to NO_CALLABLE_TIE state: advantageP1Format
+            Transitions to NO_CALLABLE_TIE state: callableNoTie
+             */
             noCallableTieFormat();
             state = NO_CALLABLE_TIE;
             return;
         }
 
         if (isMaximumPointsOfAnyPlayerAtLeast(4) && isPlayer1AheadOf2() && isTwoOrMoreDifferenceInPoints(player1Points, player2Points)) {
+            /*
+            Transitions to WIN_P1 state: callableNoTie
+            Transitions to WIN_P1 state: advantageP1Format
+             */
             winP1Format();
             state = WIN_P1;
             return;
         }
         if (isMaximumPointsOfAnyPlayerAtLeast(4) && isPlayer2AheadOf1() && isTwoOrMoreDifferenceInPoints(player1Points, player2Points)) {
+            /*
+            Transitions to WIN_P2 state: callableNoTie
+            Transitions to WIN_P2 state: advantageP2
+             */
             winP2Format();
             state = WIN_P2;
             return;
         }
 
         if (isPlayer1AheadOf2() && PointCall.canBeNamedDeuceOrAdvantage(player2Points)) {
+            /*
+            Transitions to ADVANTAGE_P1 state: noCallableTie
+             */
             advantageP1Format();
             state = ADVANTAGE_P1;
             return;
         }
 
         if (isPlayer2AheadOf1() && PointCall.canBeNamedDeuceOrAdvantage(player1Points)) {
+            /*
+            Transitions to ADVANTAGE_P2 state: noCallableTie
+             */
+            System.out.println("Transitions to ADVANTAGE_P2 state: " + state );
             advantageP2Format();
             state = ADVANTAGE_P2;
             return;
@@ -112,7 +129,7 @@ public class TennisGame2 implements approach2.TennisGame {
     private void addPointsTo(String player) {
         if (player == "player1") {
             player1Points++;
-        }else {
+        } else {
             player2Points++;
         }
     }
