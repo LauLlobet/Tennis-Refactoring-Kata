@@ -40,17 +40,18 @@ public class TennisGame2 implements approach2.TennisGame {
 
         addPointsTo(player);
 
-        if (PointCall.isPointCall(player2Points) && PointCall.isPointCall(player1Points) && !isTie()) {
+        if (isCallableNoTieScore()) {
             /*
             Transitions to CALLABLENOTIE state: callableTie
             Transitions to CALLABLENOTIE state: callableNoTie
             */
+            scoreStateObj = scoreStateObj.nextState(player1Points,player2Points);
             score = scoreStateObj.toString(player1Points,player2Points);
             //callableNoTieFormat();
             return;
         }
 
-        if (isTie() && !PointCall.canBeNamedDeuceOrAdvantage(player1Points)) {
+        if (isCallableTieScore()) {
             /*
             Transitions to CALLABLETIE state: callableNoTie
              */
@@ -60,7 +61,7 @@ public class TennisGame2 implements approach2.TennisGame {
             return;
         }
 
-        if (isTie() && PointCall.canBeNamedDeuceOrAdvantage(player1Points)) {
+        if (isNoCallableTie()) {
             /*
             Transitions to NO_CALLABLE_TIE state: advantageP1Format
             Transitions to NO_CALLABLE_TIE state: callableNoTie
@@ -72,7 +73,7 @@ public class TennisGame2 implements approach2.TennisGame {
             return;
         }
 
-        if (isMaximumPointsOfAnyPlayerAtLeast(4) && isTwoOrMoreDifferenceInPoints(player1Points, player2Points)) {
+        if (isWinP1()) {
             /*
             Transitions to WIN_P1 state: callableNoTie
             Transitions to WIN_P1 state: advantageP1Format
@@ -83,7 +84,7 @@ public class TennisGame2 implements approach2.TennisGame {
             scoreStateObj = new InconsistendStateScore();
             return;
         }
-        if (isPlayer1AheadOf2() && PointCall.canBeNamedDeuceOrAdvantage(player2Points)) {
+        if (isAdvantageP1()) {
             /*
             Transitions to ADVANTAGE_P1 state: noCallableTie
              */
@@ -94,7 +95,7 @@ public class TennisGame2 implements approach2.TennisGame {
             return;
         }
 
-        if (isPlayer2AheadOf1() && PointCall.canBeNamedDeuceOrAdvantage(player1Points)) {
+        if (isAdvantageP2()) {
             /*
             Transitions to ADVANTAGE_P2 state: noCallableTie
              */
@@ -105,6 +106,30 @@ public class TennisGame2 implements approach2.TennisGame {
         }
 
 
+    }
+
+    private boolean isAdvantageP2() {
+        return isPlayer2AheadOf1() && PointCall.canBeNamedDeuceOrAdvantage(player1Points);
+    }
+
+    private boolean isAdvantageP1() {
+        return isPlayer1AheadOf2() && PointCall.canBeNamedDeuceOrAdvantage(player2Points);
+    }
+
+    private boolean isWinP1() {
+        return isMaximumPointsOfAnyPlayerAtLeast(4) && isTwoOrMoreDifferenceInPoints(player1Points, player2Points);
+    }
+
+    private boolean isNoCallableTie() {
+        return isTie() && PointCall.canBeNamedDeuceOrAdvantage(player1Points);
+    }
+
+    private boolean isCallableTieScore() {
+        return isTie() && !PointCall.canBeNamedDeuceOrAdvantage(player1Points);
+    }
+
+    private boolean isCallableNoTieScore() {
+        return PointCall.isPointCall(player2Points) && PointCall.isPointCall(player1Points) && !isTie();
     }
 
     private void addPointsTo(String player) {
