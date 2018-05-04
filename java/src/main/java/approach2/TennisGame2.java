@@ -57,7 +57,6 @@ public class TennisGame2 implements approach2.TennisGame {
         addPointsTo(player);
 
         if (PointCall.isPointCall(player2Points) && PointCall.isPointCall(player1Points) && !isTie()) {
-            System.out.println("Transitions to CALLABLENOTIE state: "+ state);
             /*
             Transitions to CALLABLENOTIE state: callableTie
             Transitions to CALLABLENOTIE state: callableNoTie
@@ -68,6 +67,11 @@ public class TennisGame2 implements approach2.TennisGame {
         }
 
         if (isTie() && !PointCall.canBeNamedDeuceOrAdvantage(player1Points)) {
+            System.out.println("Transitions to CALLABLETIE state: "+ state);
+            /*
+            Transitions to CALLABLETIE state: callableNoTie
+             */
+
             callableTieFormat();
             state = CALLABLE_TIE;
             return;
