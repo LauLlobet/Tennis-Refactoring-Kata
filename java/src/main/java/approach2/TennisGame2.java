@@ -1,6 +1,13 @@
 package approach2;
 
 public class TennisGame2 implements approach2.TennisGame {
+    public static final String CALLABLE_TIE = "callableTie";
+    public static final String CALLABLE_NO_TIE = "callableNoTie";
+    public static final String NO_CALLABLE_TIE = "noCallableTie";
+    public static final String WIN_P1 = "winP1Format";
+    public static final String WIN_P2 = "winP2Format";
+    public static final String ADVANTAGE_P1 = "advantageP1Format";
+    public static final String ADVANTAGE_P2 = "advantageP2";
     public int player1Points = 0;
     public int player2Points = 0;
 
@@ -44,40 +51,54 @@ public class TennisGame2 implements approach2.TennisGame {
         return Math.abs(player1Points-player2Points) >= 2;
     }
 
+    public String state = CALLABLE_TIE;
+
     public void wonPoint(String player) {
         addPointsTo(player);
 
         if (PointCall.isPointCall(player2Points) && PointCall.isPointCall(player1Points) && !isTie()) {
+            System.out.println("Transitions to CALLABLENOTIE state: "+ state);
+            /*
+            Transitions to CALLABLENOTIE state: callableTie
+            Transitions to CALLABLENOTIE state: callableNoTie
+            */
             callableNoTieFormat();
+            state = CALLABLE_NO_TIE;
             return;
         }
 
         if (isTie() && !PointCall.canBeNamedDeuceOrAdvantage(player1Points)) {
             callableTieFormat();
+            state = CALLABLE_TIE;
             return;
         }
 
         if (isTie() && PointCall.canBeNamedDeuceOrAdvantage(player1Points)) {
             noCallableTieFormat();
+            state = NO_CALLABLE_TIE;
             return;
         }
 
         if (isMaximumPointsOfAnyPlayerAtLeast(4) && isPlayer1AheadOf2() && isTwoOrMoreDifferenceInPoints(player1Points, player2Points)) {
             winP1Format();
+            state = WIN_P1;
             return;
         }
         if (isMaximumPointsOfAnyPlayerAtLeast(4) && isPlayer2AheadOf1() && isTwoOrMoreDifferenceInPoints(player1Points, player2Points)) {
             winP2Format();
+            state = WIN_P2;
             return;
         }
 
         if (isPlayer1AheadOf2() && PointCall.canBeNamedDeuceOrAdvantage(player2Points)) {
             advantageP1Format();
+            state = ADVANTAGE_P1;
             return;
         }
 
         if (isPlayer2AheadOf1() && PointCall.canBeNamedDeuceOrAdvantage(player1Points)) {
             advantageP2Format();
+            state = ADVANTAGE_P2;
             return;
         }
 
