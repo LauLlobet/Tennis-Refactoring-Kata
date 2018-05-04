@@ -68,6 +68,7 @@ public class TennisGame2 implements approach2.TennisGame {
             ScoreState nonTransitionedScoreStateObj;
             nonTransitionedScoreStateObj = new NoCallableTieScoreState();
             score = nonTransitionedScoreStateObj.toString(player1Points,player2Points);
+            scoreStateObj = new InconsistendStateScore();
             return;
         }
 
@@ -79,6 +80,7 @@ public class TennisGame2 implements approach2.TennisGame {
             ScoreState nonTransitionedScoreStateObj;
             nonTransitionedScoreStateObj = new WinScoreState();
             score = nonTransitionedScoreStateObj.toString(player1Points,player2Points);
+            scoreStateObj = new InconsistendStateScore();
             return;
         }
         if (isPlayer1AheadOf2() && PointCall.canBeNamedDeuceOrAdvantage(player2Points)) {
@@ -88,6 +90,7 @@ public class TennisGame2 implements approach2.TennisGame {
             ScoreState nonTransitionedScoreStateObj;
             nonTransitionedScoreStateObj = new AdvantageP1ScoreState();
             score = nonTransitionedScoreStateObj.toString(player1Points,player2Points);
+            scoreStateObj = new InconsistendStateScore();
             return;
         }
 
@@ -98,6 +101,7 @@ public class TennisGame2 implements approach2.TennisGame {
             ScoreState nonTransitionedScoreStateObj;
             nonTransitionedScoreStateObj = new AdantageP2ScoreState();
             score = nonTransitionedScoreStateObj.toString(player1Points,player2Points);
+            scoreStateObj = new InconsistendStateScore();
         }
 
 
