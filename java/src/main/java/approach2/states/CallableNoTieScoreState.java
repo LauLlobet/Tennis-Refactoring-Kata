@@ -17,6 +17,9 @@ public class CallableNoTieScoreState extends ScoreState {
         if(isCallableNoTieScore()){
             return new CallableNoTieScoreState();
         }
+        if(isCallableTieScore()){
+            return new CallableTieScoreState();
+        }
         return new TESTHandledByIfListScoreState();
     }
 
@@ -26,5 +29,9 @@ public class CallableNoTieScoreState extends ScoreState {
 
     private boolean isTie() {
         return player1Points == player2Points;
+    }
+
+    private boolean isCallableTieScore() {
+        return isTie() && !PointCall.canBeNamedDeuceOrAdvantage(player1Points);
     }
 }

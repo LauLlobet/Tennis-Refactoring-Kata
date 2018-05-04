@@ -45,19 +45,6 @@ public class TennisGame2 implements approach2.TennisGame {
         scoreStateObj = scoreStateObj.nextState(player1Points,player2Points);
         score = scoreStateObj.toString(player1Points,player2Points);
 
-        if (isCallableTieScore()) {
-            /*
-            Transitions to CALLABLETIE state: callableNoTie
-             */
-            ScoreState nonTransitionedScoreStateObj;
-            nonTransitionedScoreStateObj = new CallableTieScoreState();
-            score = nonTransitionedScoreStateObj.toString(player1Points,player2Points);
-
-            scoreStateObj = nonTransitionedScoreStateObj;
-
-            return;
-        }
-
         if (isNoCallableTie()) {
             /*
             Transitions to NO_CALLABLE_TIE state: advantageP1Format
@@ -121,13 +108,6 @@ public class TennisGame2 implements approach2.TennisGame {
         return isTie() && PointCall.canBeNamedDeuceOrAdvantage(player1Points);
     }
 
-    private boolean isCallableTieScore() {
-        return isTie() && !PointCall.canBeNamedDeuceOrAdvantage(player1Points);
-    }
-
-    private boolean isCallableNoTieScore() {
-        return PointCall.isPointCall(player2Points) && PointCall.isPointCall(player1Points) && !isTie();
-    }
 
     private void addPointsTo(String player) {
         if (player.equals("player1")) {
