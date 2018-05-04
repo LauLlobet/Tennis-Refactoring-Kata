@@ -1,5 +1,7 @@
 package approach2;
 
+import approach2.states.*;
+
 public class TennisGame2 implements approach2.TennisGame {
     private int player1Points = 0;
     private int player2Points = 0;
@@ -40,16 +42,8 @@ public class TennisGame2 implements approach2.TennisGame {
 
         addPointsTo(player);
 
-        if (isCallableNoTieScore()) {
-            /*
-            Transitions to CALLABLENOTIE state: callableTie
-            Transitions to CALLABLENOTIE state: callableNoTie
-            */
-            scoreStateObj = scoreStateObj.nextState(player1Points,player2Points);
-            score = scoreStateObj.toString(player1Points,player2Points);
-            //callableNoTieFormat();
-            return;
-        }
+        scoreStateObj = scoreStateObj.nextState(player1Points,player2Points);
+        score = scoreStateObj.toString(player1Points,player2Points);
 
         if (isCallableTieScore()) {
             /*
@@ -58,6 +52,9 @@ public class TennisGame2 implements approach2.TennisGame {
             ScoreState nonTransitionedScoreStateObj;
             nonTransitionedScoreStateObj = new CallableTieScoreState();
             score = nonTransitionedScoreStateObj.toString(player1Points,player2Points);
+
+            scoreStateObj = nonTransitionedScoreStateObj;
+
             return;
         }
 
@@ -69,7 +66,7 @@ public class TennisGame2 implements approach2.TennisGame {
             ScoreState nonTransitionedScoreStateObj;
             nonTransitionedScoreStateObj = new NoCallableTieScoreState();
             score = nonTransitionedScoreStateObj.toString(player1Points,player2Points);
-            scoreStateObj = new InconsistendStateScore();
+            scoreStateObj = new TESTHandledByIfListScoreState();
             return;
         }
 
@@ -81,7 +78,7 @@ public class TennisGame2 implements approach2.TennisGame {
             ScoreState nonTransitionedScoreStateObj;
             nonTransitionedScoreStateObj = new WinScoreState();
             score = nonTransitionedScoreStateObj.toString(player1Points,player2Points);
-            scoreStateObj = new InconsistendStateScore();
+            scoreStateObj = new TESTHandledByIfListScoreState();
             return;
         }
         if (isAdvantageP1()) {
@@ -91,7 +88,7 @@ public class TennisGame2 implements approach2.TennisGame {
             ScoreState nonTransitionedScoreStateObj;
             nonTransitionedScoreStateObj = new AdvantageP1ScoreState();
             score = nonTransitionedScoreStateObj.toString(player1Points,player2Points);
-            scoreStateObj = new InconsistendStateScore();
+            scoreStateObj = new TESTHandledByIfListScoreState();
             return;
         }
 
@@ -102,7 +99,7 @@ public class TennisGame2 implements approach2.TennisGame {
             ScoreState nonTransitionedScoreStateObj;
             nonTransitionedScoreStateObj = new AdantageP2ScoreState();
             score = nonTransitionedScoreStateObj.toString(player1Points,player2Points);
-            scoreStateObj = new InconsistendStateScore();
+            scoreStateObj = new TESTHandledByIfListScoreState();
         }
 
 

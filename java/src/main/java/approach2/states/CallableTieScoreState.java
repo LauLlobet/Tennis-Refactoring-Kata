@@ -1,11 +1,16 @@
-package approach2;
+package approach2.states;
 
-public class CallableNoTieScoreState extends ScoreState {
-    private int player2Points;
+import approach2.PointCall;
+
+public class CallableTieScoreState extends ScoreState {
     private int player1Points;
+    private int player2Points;
 
     public String toString(int player1Points, int player2Points) {
-        return PointCall.fromPoints(player1Points).toString() + "-" + PointCall.fromPoints(player2Points).toString();
+        String printableScore;
+        printableScore = PointCall.fromPoints(player1Points).toString();
+        printableScore += "-All";
+        return printableScore;
     }
 
     public ScoreState nextState(int player1Points, int player2Points){
@@ -15,7 +20,7 @@ public class CallableNoTieScoreState extends ScoreState {
         if(isCallableNoTieScore()){
             return new CallableNoTieScoreState();
         }
-        return new InconsistendStateScore();
+        return new TESTHandledByIfListScoreState();
     }
 
     private boolean isCallableNoTieScore() {
