@@ -13,7 +13,7 @@ public class TennisGame3 implements TennisGame {
 
     public String getScore() {
         String s;
-        if (CallPoint.isCallable(p1) && p2 < 4 && !(p1 + p2 == 6)) {
+        if (CallPoint.isCallable(p1) && CallPoint.isCallable(p2) && !(p1 + p2 == 6)) { // too large step
             return tieCall();
         } else {
             if (p1 == p2)
