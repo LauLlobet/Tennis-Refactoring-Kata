@@ -18,4 +18,8 @@ public enum CallPoint {
     public String toString() {
         return call;
     }
+
+    public static boolean isCallable(int points) {
+        return values().length > points;
+    }
 }
