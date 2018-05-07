@@ -13,18 +13,26 @@ public class TennisGame3 implements TennisGame {
 
     public String getScore() {
         String s;
-        if (CallPoint.isCallable(p1) && CallPoint.isCallable(p2) && !(p1 + p2 == 6)) { // too large step
+        if (isCallable()) { // too large step
             return tieCall();
         } else {
-            if (p1 == p2)
+            if (isTie())
                 return "Deuce";
             s = p1 > p2 ? p1N : p2N;
             return ((p1-p2)*(p1-p2) == 1) ? "Advantage " + s : "Win for " + s;
         }
     }
 
+    private boolean isTie() {
+        return p1 == p2;
+    }
+
+    private boolean isCallable() {
+        return CallPoint.isCallable(p1) && CallPoint.isCallable(p2) && !(p1 + p2 == 6);
+    }
+
     private String tieCall(){
-        if(p1 == p2) {
+        if(isTie()) {
             return CallPoint.fromPointString(p1) + "-All";
         } else {
             return CallPoint.fromPointString(p1) + "-" + CallPoint.fromPointString(p2);
