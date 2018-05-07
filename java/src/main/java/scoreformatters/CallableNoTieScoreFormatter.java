@@ -1,8 +1,10 @@
-public class CallableNoTieFormatter implements ScoreFormatter {
+package scoreformatters;
+
+public class CallableNoTieScoreFormatter implements scoreformatters.ScoreFormatter {
     private final int p1;
     private final int p2;
 
-    public CallableNoTieFormatter(int p1, int p2) {
+    public CallableNoTieScoreFormatter(int p1, int p2) {
         this.p1 = p1;
         this.p2 = p2;
     }

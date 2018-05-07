@@ -1,3 +1,5 @@
+package scoreformatters;
+
 public enum CallPoint {
     LOVE(0,"Love"),FIFTEEN(1,"Fifteen"),THIRTY(2,"Thirty"),FORTY(3,"Forty");
 
@@ -8,7 +10,6 @@ public enum CallPoint {
         this.points = points;
         this.call = call;
     }
-
 
     public static String fromPointString(int point) {
         return values()[point].toString();

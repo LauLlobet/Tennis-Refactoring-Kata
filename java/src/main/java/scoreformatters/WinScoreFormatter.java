@@ -1,7 +1,9 @@
-public class WinFormatter implements ScoreFormatter {
+package scoreformatters;
+
+public class WinScoreFormatter implements scoreformatters.ScoreFormatter {
     private final String playerWithMostPoints;
 
-    public WinFormatter(String playerWithMostPoints) {
+    public WinScoreFormatter(String playerWithMostPoints) {
         this.playerWithMostPoints = playerWithMostPoints;
     }
 
