@@ -24,7 +24,11 @@ public class TennisGame3 implements TennisGame {
     }
 
     private String tieCall(){
-        return (p1 == p2) ? CallPoint.fromPointString(p1) + "-All" : CallPoint.fromPointString(p1) + "-" + CallPoint.fromPointString(p2);
+        if(p1 == p2) {
+            return CallPoint.fromPointString(p1) + "-All";
+        } else {
+            return CallPoint.fromPointString(p1) + "-" + CallPoint.fromPointString(p2);
+        }
     }
 
     public void wonPoint(String playerName) {
