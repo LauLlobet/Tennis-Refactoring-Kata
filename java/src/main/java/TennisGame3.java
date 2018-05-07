@@ -13,7 +13,7 @@ public class TennisGame3 implements TennisGame {
 
     public String getScore() {
         if (isCallable()) {
-            return callableFormatOfScore();
+            return callableFormatOfScore().asString();
         } else {
             return notCallableFormatOfScore().asString();
         }
@@ -31,20 +31,12 @@ public class TennisGame3 implements TennisGame {
         return new WinFormatter(playerWithMostPoints);
     }
 
-    private String callableFormatOfScore() {
+    private ScoreFormatter callableFormatOfScore() {
         if(isTie()) {
-            return formatToCallableTie();
+            return new CallableTieFormatter(p1);
         } else {
-            return formatToCallableNotTie();
+            return new CallableNoTieFormatter(p1,p2);
         }
-    }
-
-    private String formatToCallableNotTie() {
-        return CallPoint.fromPointString(p1) + "-" + CallPoint.fromPointString(p2);
-    }
-
-    private String formatToCallableTie() {
-        return CallPoint.fromPointString(p1) + "-All";
     }
 
     private String playerWithMostPoints() {
