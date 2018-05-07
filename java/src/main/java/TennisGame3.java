@@ -12,22 +12,39 @@ public class TennisGame3 implements TennisGame {
     }
 
     public String getScore() {
-        String s;
-        if (isCallable()) { // too large step
-            if(isTie()) {
-                return formatToCallableTie();
-            } else {
-                return formatToCallableNotTie();
-            }
+        if (isCallable()) {
+            return callableFormatOfScore();
         } else {
-            if (isTie())
-                return formatNotCallableTie();
-            s = playerWithMostPoints();
-            if(hasAdvantageOfMoreThanOnePoint()){
-                return "Advantage " + s;
-            }
-            return "Win for " + s;
+            return notCallableFormatOfScore();
         }
+    }
+
+    private String notCallableFormatOfScore() {
+        String playerWithMostPoints;
+        if (isTie())
+            return formatNotCallableTie();
+
+        playerWithMostPoints = playerWithMostPoints();
+        if(hasAdvantageOfMoreThanOnePoint()){
+            return formatToAdvantage(playerWithMostPoints);
+        }
+        return formatToWin(playerWithMostPoints);
+    }
+
+    private String callableFormatOfScore() {
+        if(isTie()) {
+            return formatToCallableTie();
+        } else {
+            return formatToCallableNotTie();
+        }
+    }
+
+    private String formatToWin(String s) {
+        return "Win for " + s;
+    }
+
+    private String formatToAdvantage(String s) {
+        return "Advantage " + s;
     }
 
     private String formatNotCallableTie() {
