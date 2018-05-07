@@ -15,16 +15,31 @@ public class TennisGame3 implements TennisGame {
         String s;
         if (isCallable()) { // too large step
             if(isTie()) {
-                return CallPoint.fromPointString(p1) + "-All";
+                return formatToCallableTie();
             } else {
-                return CallPoint.fromPointString(p1) + "-" + CallPoint.fromPointString(p2);
+                return formatToCallableNotTie();
             }
         } else {
             if (isTie())
-                return "Deuce";
+                return formatNotCallableTie();
             s = playerWithMostPoints();
-            return hasAdvantageOfMoreThanOnePoint() ? "Advantage " + s : "Win for " + s;
+            if(hasAdvantageOfMoreThanOnePoint()){
+                return "Advantage " + s;
+            }
+            return "Win for " + s;
         }
+    }
+
+    private String formatNotCallableTie() {
+        return "Deuce";
+    }
+
+    private String formatToCallableNotTie() {
+        return CallPoint.fromPointString(p1) + "-" + CallPoint.fromPointString(p2);
+    }
+
+    private String formatToCallableTie() {
+        return CallPoint.fromPointString(p1) + "-All";
     }
 
     private String playerWithMostPoints() {
