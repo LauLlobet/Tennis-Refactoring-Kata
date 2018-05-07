@@ -14,13 +14,25 @@ public class TennisGame3 implements TennisGame {
     public String getScore() {
         String s;
         if (isCallable()) { // too large step
-            return tieCall();
+            if(isTie()) {
+                return CallPoint.fromPointString(p1) + "-All";
+            } else {
+                return CallPoint.fromPointString(p1) + "-" + CallPoint.fromPointString(p2);
+            }
         } else {
             if (isTie())
                 return "Deuce";
-            s = p1 > p2 ? p1N : p2N;
-            return ((p1-p2)*(p1-p2) == 1) ? "Advantage " + s : "Win for " + s;
+            s = playerWithMostPoints();
+            return hasAdvantageOfMoreThanOnePoint() ? "Advantage " + s : "Win for " + s;
         }
+    }
+
+    private String playerWithMostPoints() {
+        return p1 > p2 ? p1N : p2N;
+    }
+
+    private boolean hasAdvantageOfMoreThanOnePoint() {
+        return (p1-p2)*(p1-p2) == 1;
     }
 
     private boolean isTie() {
@@ -29,14 +41,6 @@ public class TennisGame3 implements TennisGame {
 
     private boolean isCallable() {
         return CallPoint.isCallable(p1) && CallPoint.isCallable(p2) && !(p1 + p2 == 6);
-    }
-
-    private String tieCall(){
-        if(isTie()) {
-            return CallPoint.fromPointString(p1) + "-All";
-        } else {
-            return CallPoint.fromPointString(p1) + "-" + CallPoint.fromPointString(p2);
-        }
     }
 
     public void wonPoint(String playerName) {
