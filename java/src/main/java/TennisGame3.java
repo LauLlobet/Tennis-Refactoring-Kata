@@ -1,6 +1,6 @@
 
 public class TennisGame3 implements TennisGame {
-    
+
     private int p2;
     private int p1;
     private String p1N;
@@ -15,20 +15,20 @@ public class TennisGame3 implements TennisGame {
         if (isCallable()) {
             return callableFormatOfScore();
         } else {
-            return notCallableFormatOfScore();
+            return notCallableFormatOfScore().asString();
         }
     }
 
-    private String notCallableFormatOfScore() {
+    private ScoreFormatter notCallableFormatOfScore() {
         String playerWithMostPoints;
         if (isTie())
-            return formatNotCallableTie();
+            return new NotCallabletieFormatter();
 
         playerWithMostPoints = playerWithMostPoints();
         if(hasAdvantageOfMoreThanOnePoint()){
-            return formatToAdvantage(playerWithMostPoints);
+            return new AdvantageFormatter(playerWithMostPoints);
         }
-        return formatToWin(playerWithMostPoints);
+        return new WinFormatter(playerWithMostPoints);
     }
 
     private String callableFormatOfScore() {
@@ -37,18 +37,6 @@ public class TennisGame3 implements TennisGame {
         } else {
             return formatToCallableNotTie();
         }
-    }
-
-    private String formatToWin(String s) {
-        return "Win for " + s;
-    }
-
-    private String formatToAdvantage(String s) {
-        return "Advantage " + s;
-    }
-
-    private String formatNotCallableTie() {
-        return "Deuce";
     }
 
     private String formatToCallableNotTie() {
