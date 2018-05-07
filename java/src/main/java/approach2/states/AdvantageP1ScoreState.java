@@ -19,7 +19,7 @@ public class AdvantageP1ScoreState extends ScoreState {
     }
 
     private boolean isNoCallableTie() {
-        return isTie() && PointCall.canBeNamedDeuceOrAdvantage(player1Points);
+        return isTie() && PointCall.isFortyOrOver(player1Points);
     }
 
 

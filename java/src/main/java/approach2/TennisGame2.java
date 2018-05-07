@@ -8,10 +8,10 @@ public class TennisGame2 implements approach2.TennisGame {
 
     private String score = "Love-All";
 
-    private ScoreState scoreStateObj;
+    private ScoreState scoreState;
 
     public TennisGame2(String player1Name, String player2Name) {
-        scoreStateObj = new CallableNoTieScoreState();
+        scoreState = new CallableNoTieScoreState();
     }
 
     public String getScore() {
@@ -42,8 +42,13 @@ public class TennisGame2 implements approach2.TennisGame {
 
         addPointsTo(player);
 
-        scoreStateObj = scoreStateObj.nextState(player1Points,player2Points);
-        score = scoreStateObj.toString(player1Points,player2Points);
+        scoreState = scoreState.nextState(player1Points,player2Points);
+        score = scoreState.toString(player1Points,player2Points);
+
+
+        /* TODO: if all ifs are moved into a intitiall state you don't have a competition of both states (if+statpattern)
+        TODO: if the state score is moved into a state class and not passed along as a parameter, it can disappeare easily .
+         */
 
         if (isWinP1()) {
             /*
@@ -52,7 +57,7 @@ public class TennisGame2 implements approach2.TennisGame {
             ScoreState nonTransitionedScoreStateObj;
             nonTransitionedScoreStateObj = new WinP1ScoreState();
             score = nonTransitionedScoreStateObj.toString(player1Points,player2Points);
-            scoreStateObj = new TESTHandledByIfListScoreState();
+            scoreState = new TESTHandledByIfListScoreState();
             return;
         }
         if (isWinP2()) {
@@ -62,7 +67,7 @@ public class TennisGame2 implements approach2.TennisGame {
             ScoreState nonTransitionedScoreStateObj;
             nonTransitionedScoreStateObj = new WinP2ScoreState();
             score = nonTransitionedScoreStateObj.toString(player1Points,player2Points);
-            scoreStateObj = new TESTHandledByIfListScoreState();
+            scoreState = new TESTHandledByIfListScoreState();
             return;
         }
         if (isAdvantageP1()) {
@@ -72,7 +77,7 @@ public class TennisGame2 implements approach2.TennisGame {
             ScoreState nonTransitionedScoreStateObj;
             nonTransitionedScoreStateObj = new AdvantageP1ScoreState();
             score = nonTransitionedScoreStateObj.toString(player1Points,player2Points);
-            scoreStateObj = nonTransitionedScoreStateObj;
+            scoreState = nonTransitionedScoreStateObj;
             return;
         }
 
@@ -83,18 +88,18 @@ public class TennisGame2 implements approach2.TennisGame {
             ScoreState nonTransitionedScoreStateObj;
             nonTransitionedScoreStateObj = new AdantageP2ScoreState();
             score = nonTransitionedScoreStateObj.toString(player1Points,player2Points);
-            scoreStateObj = new TESTHandledByIfListScoreState();
+            scoreState = new TESTHandledByIfListScoreState();
         }
 
 
     }
 
     private boolean isAdvantageP2() {
-        return isPlayer2AheadOf1() && PointCall.canBeNamedDeuceOrAdvantage(player1Points);
+        return isPlayer2AheadOf1() && PointCall.isFortyOrOver(player1Points);
     }
 
     private boolean isAdvantageP1() {
-        return isPlayer1AheadOf2() && PointCall.canBeNamedDeuceOrAdvantage(player2Points);
+        return isPlayer1AheadOf2() && PointCall.isFortyOrOver(player2Points);
     }
 
     private boolean isWinP1() {
@@ -106,7 +111,7 @@ public class TennisGame2 implements approach2.TennisGame {
     }
 
     private boolean isNoCallableTie() {
-        return isTie() && PointCall.canBeNamedDeuceOrAdvantage(player1Points);
+        return isTie() && PointCall.isFortyOrOver(player1Points);
     }
 
 

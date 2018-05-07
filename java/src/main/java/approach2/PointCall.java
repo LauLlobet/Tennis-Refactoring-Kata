@@ -24,7 +24,7 @@ public enum PointCall {
         return points < values().length;
     }
 
-    public static boolean canBeNamedDeuceOrAdvantage(int points) {
+    public static boolean isFortyOrOver(int points) {
         return points > 2;
     }
 }

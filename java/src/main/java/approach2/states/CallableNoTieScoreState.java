@@ -35,10 +35,10 @@ public class CallableNoTieScoreState extends ScoreState {
     }
 
     private boolean isCallableTieScore() {
-        return isTie() && !PointCall.canBeNamedDeuceOrAdvantage(player1Points);
+        return isTie() && !PointCall.isFortyOrOver(player1Points);
     }
 
     private boolean isNoCallableTie() {
-        return isTie() && PointCall.canBeNamedDeuceOrAdvantage(player1Points);
+        return isTie() && PointCall.isFortyOrOver(player1Points);
     }
 }
